@@ -35,9 +35,9 @@ This is a note-taking application built with the MERN stack (MongoDB, Express, R
 npm install
 ```
 
-4. Set up the environment variables in /client and /server
+3. Set up the environment variables in /client and /server
 
-5. Start the server and client
+4. Start the server and client
 
 ```bash
 npm run dev
