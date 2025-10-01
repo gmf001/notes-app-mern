@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.dev
+    command: npm run dev
+    env_file:
+      - ./server/.env
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./server:/app # live-edit source
+      - /app/node_modules # prevent host node_modules from shadowing
+    restart: unless-stopped
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+    command: npm run dev
+    environment:
+      - HOST=0.0.0.0 # let vite bind to container IP
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    depends_on:
+      - server
